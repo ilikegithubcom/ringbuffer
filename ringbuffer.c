@@ -123,6 +123,7 @@ int RingBufferMrSwPut(RingBuffer16 *rb, void *ptr)
     }
 
     rb->array[rb->write] = ptr;
+    // 此处可以直接写 rb->write++
     (void)__sync_add_and_fetch(&rb->write, 1);
 
     return 0;

@@ -4,11 +4,14 @@
 #include <pthread.h>
 #include <inttypes.h>
 
+// 表达式x的可能性大
 #define likely(x) __builtin_expect(!!(x), 1)
+// 表达式x的可能性小
 #define unlikely(x) __builtin_expect(!!(x), 0)
 
 #define RING_BUFFER_16_SIZE 65536
 
+// CPU不缓存
 typedef volatile int spinlock_t;
 
 #define INIT_SPINLOCK(lock) lock = 0
@@ -24,6 +27,7 @@ do {                          \
     *lock = 0;                \
 } while(0)
 
+// 内存池结构
 typedef struct RingBuffer16_
 {
     unsigned short write;
